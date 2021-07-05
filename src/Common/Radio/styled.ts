@@ -43,11 +43,11 @@ export const StyledLabel = styled.label`
   }
 
   &:hover input ~ ${StyledCheckmark} {
-    background-color: #ccc;
+    background-color: ${(props) => props.theme.buttons.primary};
   }
 
   input:checked ~ ${StyledCheckmark} {
-    background-color: #2196f3;
+    background-color: ${(props) => props.theme.buttons.primary};
   }
 
   input:checked ~ ${StyledCheckmark}:after {
@@ -55,14 +55,22 @@ export const StyledLabel = styled.label`
   }
 
   ${StyledCheckmark}:after {
-    left: 9px;
-    top: 5px;
+    left: 6px;
+    top: 7px;
     width: 5px;
     height: 10px;
     border: solid white;
-    border-width: 0 3px 3px 0;
+    border-width: 0 2px 3px 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+
+    @media (min-width: 600px) {
+      left: 10px;
+      top: 6px;
+      width: 6px;
+      height: 12px;
+      border-width: 0 3px 3px 0;
+    }
   }
 `;

@@ -49,19 +49,18 @@ export const StyledFooter = styled.footer`
   align-items: center;
   flex-direction: column;
   bottom: 0;
-  left: 0;
   height: 64px;
   width: 100vw;
   margin-left: -15px;
 
   clear: both;
-  position: relative;
+  position: fixed;
   margin-top: -64px;
 
   background-color: ${(props) => props.theme.background};
 
   @media (min-width: 600px) {
-    width: 100%;
+    width: calc(100% - 320px);
     margin: 0;
   }
 `;
