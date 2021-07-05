@@ -1,7 +1,12 @@
 import { ITodo } from "./types";
 
+const url =
+  process.env.NODE_ENV === "production"
+    ? "https://3pqpt.sse.codesandbox.io/todos"
+    : "http://localhost:3001/todos";
+
 export async function getTodos(): Promise<ITodo[]> {
-  const response = await fetch("http://localhost:3001/todos", {
+  const response = await fetch(url, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -12,7 +17,7 @@ export async function getTodos(): Promise<ITodo[]> {
 }
 
 export async function postTodo(data: ITodo): Promise<ITodo> {
-  const response = await fetch("http://localhost:3001/todos", {
+  const response = await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -24,7 +29,7 @@ export async function postTodo(data: ITodo): Promise<ITodo> {
 }
 
 export async function deleteTodo(id: string): Promise<void> {
-  const response = await fetch(`http://localhost:3001/todos/${id}`, {
+  const response = await fetch(`${url}/${id}`, {
     method: "DELETE",
   });
 
@@ -32,7 +37,7 @@ export async function deleteTodo(id: string): Promise<void> {
 }
 
 export async function patchTodo(id: string, data: string): Promise<void> {
-  const response = await fetch(`http://localhost:3001/todos/${id}`, {
+  const response = await fetch(`${url}/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
