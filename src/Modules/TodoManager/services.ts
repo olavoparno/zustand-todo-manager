@@ -2,7 +2,7 @@ import { ITodo } from "./types";
 
 const url =
   process.env.NODE_ENV === "production"
-    ? "https://3pqpt.sse.codesandbox.io/todos"
+    ? "https://zustand-todo-manager.herokuapp.com/todos"
     : "http://localhost:3001/todos";
 
 export async function getTodos(): Promise<ITodo[]> {
