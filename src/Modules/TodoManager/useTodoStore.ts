@@ -1,69 +1,57 @@
 import create from "zustand";
-import { generateUuid } from "../../Common/Helpers";
+import { mockTodos } from "./mock";
 import { ITodo, ITodoStore, EViews } from "./types";
 
+const fakeSleep = (timeToWait = 200) =>
+  new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(true);
+    }, timeToWait)
+  );
+
 export const useTodoStore = create<ITodoStore>((set) => ({
-  todos: [
-    {
-      id: generateUuid(),
-      status: "OPEN",
-      creationDate: new Date().toString(),
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultricies eget neque, libero, massa morbi aliquam ornare. Et tristique sit faucibus suspendisse massa sit turpis vitae. Aliquam eget ipsum ut viverra est porta. Odio velit et, egestas in netus. Porttitor amet erat scelerisque aenean enim tortor, gravida quisque. Egestas dui non commodo phasellus nibh volutpat nulla in. ",
-      title: "Create Sign In validation",
-    },
-    {
-      id: generateUuid(),
-      status: "OPEN",
-      creationDate: new Date().toString(),
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultricies eget neque, libero, massa morbi aliquam ornare. Et tristique sit faucibus suspendisse massa sit turpis vitae. Aliquam eget ipsum ut viverra est porta. Odio velit et, egestas in netus. Porttitor amet erat scelerisque aenean enim tortor, gravida quisque. Egestas dui non commodo phasellus nibh volutpat nulla in. ",
-      title: "Implement validations",
-    },
-    {
-      id: generateUuid(),
-      status: "CLOSED",
-      creationDate: new Date().toString(),
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultricies eget neque, libero, massa morbi aliquam ornare. Et tristique sit faucibus suspendisse massa sit turpis vitae. Aliquam eget ipsum ut viverra est porta. Odio velit et, egestas in netus. Porttitor amet erat scelerisque aenean enim tortor, gravida quisque. Egestas dui non commodo phasellus nibh volutpat nulla in. ",
-      title: "Align with team X",
-    },
-    {
-      id: generateUuid(),
-      status: "OPEN",
-      creationDate: new Date().toString(),
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultricies eget neque, libero, massa morbi aliquam ornare. Et tristique sit faucibus suspendisse massa sit turpis vitae. Aliquam eget ipsum ut viverra est porta. Odio velit et, egestas in netus. Porttitor amet erat scelerisque aenean enim tortor, gravida quisque. Egestas dui non commodo phasellus nibh volutpat nulla in. ",
-      title: "Discuss new feature",
-    },
-    {
-      id: generateUuid(),
-      status: "OPEN",
-      creationDate: new Date().toString(),
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultricies eget neque, libero, massa morbi aliquam ornare. Et tristique sit faucibus suspendisse massa sit turpis vitae. Aliquam eget ipsum ut viverra est porta. Odio velit et, egestas in netus. Porttitor amet erat scelerisque aenean enim tortor, gravida quisque. Egestas dui non commodo phasellus nibh volutpat nulla in. ",
-      title: "Another subject",
-    },
-  ],
+  todos: mockTodos,
   currentView: EViews.OPEN,
-  changeView: (newView: keyof typeof EViews) =>
-    set({
+  changeView: async (newView: keyof typeof EViews) => {
+    set({ isLoading: true });
+
+    await fakeSleep(300);
+
+    return set({
       currentView: newView,
-    }),
-  addTodo: async (todoItem: ITodo) =>
-    set((state) => {
+      isLoading: false,
+    });
+  },
+  addTodo: async (todoItem: ITodo) => {
+    set({ isLoading: true });
+
+    await fakeSleep(1000);
+
+    return set((state) => {
       return {
         todos: [...state.todos, todoItem],
+        isLoading: false,
       };
-    }),
-  removeTodo: async (id: string) =>
-    set((state) => {
+    });
+  },
+  removeTodo: async (id: string) => {
+    set({ isLoading: true });
+
+    await fakeSleep(700);
+
+    return set((state) => {
       return {
         todos: [...state.todos.filter((currentTodo) => currentTodo.id !== id)],
+        isLoading: false,
       };
-    }),
-  toggleTodo: (id: string) =>
-    set((state) => {
+    });
+  },
+  toggleTodo: async (id: string) => {
+    set({ isLoading: true });
+
+    await fakeSleep(250);
+
+    return set((state) => {
       return {
         todos: state.todos.map((currentTodo) => {
           if (currentTodo.id === id) {
@@ -75,6 +63,9 @@ export const useTodoStore = create<ITodoStore>((set) => ({
 
           return currentTodo;
         }),
+        isLoading: false,
       };
-    }),
+    });
+  },
+  isLoading: false,
 }));

@@ -5,10 +5,12 @@ import { generateUuid } from "../Helpers";
 import { useInput } from "../Hooks/useInput";
 import { StyledFlexContainer } from "../Layout/styled";
 import {
+  StyledCloseButton,
   StyledInputField,
   StyledModalContainer,
   StyledTextArea,
 } from "./styled";
+import ExcludeIcon from "../../Assets/exclude-icon.svg";
 
 export function TodoModal({
   closeModal,
@@ -31,13 +33,14 @@ export function TodoModal({
       creationDate: new Date().toString(),
     };
 
-    addTodo(newTodo).then(() => closeModal());
+    addTodo(newTodo).then(closeModal);
   };
 
   return (
     <StyledModalContainer>
       <StyledFlexContainer justifyContent="center" flexDirection="column">
         <h1>New Task</h1>
+        <StyledCloseButton src={ExcludeIcon} onClick={closeModal} />
         <StyledInputField
           name="titleInput"
           value={values.titleInput}

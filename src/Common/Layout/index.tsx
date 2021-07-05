@@ -7,6 +7,8 @@ import {
   StyledFooter,
   StyledHeader,
   StyledHeaderButtons,
+  StyledLoader,
+  StyledLoadingContainer,
   StyledTitle,
 } from "./styled";
 import { ReactComponent as MenuIcon } from "../../Assets/menu-icon.svg";
@@ -17,7 +19,7 @@ import { useModal } from "../Hooks/useModal";
 import { TodoModal } from "../Modal";
 
 export function Layout({ children }: TLayoutProps): JSX.Element {
-  const { changeView, currentView } = useTodoStore();
+  const { changeView, currentView, isLoading } = useTodoStore();
   const { ModalWrapper, isOpen, openModal, closeModal } = useModal();
 
   const handleChangeView = (e: MouseEvent<HTMLButtonElement>) => {
@@ -32,6 +34,11 @@ export function Layout({ children }: TLayoutProps): JSX.Element {
 
   return (
     <StyledContainer>
+      {isLoading && (
+        <StyledLoadingContainer>
+          <StyledLoader />
+        </StyledLoadingContainer>
+      )}
       {isOpen && (
         <ModalWrapper backdrop fade>
           <TodoModal closeModal={closeModal} />

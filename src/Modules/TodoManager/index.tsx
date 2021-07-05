@@ -33,26 +33,29 @@ export function TodoManager(): JSX.Element {
     [removeTodo]
   );
 
+  const currentTodos = todos.filter(
+    (rawTodo) => rawTodo.status === currentView
+  );
+
   return (
     <StyledTodoManagerContainer>
-      {todos
-        ?.filter((rawTodo) => rawTodo.status === currentView)
-        .map((currentTodo) => {
-          const { id, title, description, creationDate, status } = currentTodo;
+      {currentTodos.map((currentTodo) => {
+        const { id, title, description, creationDate, status } = currentTodo;
 
-          return (
-            <TodoItem
-              key={id}
-              id={id}
-              title={title}
-              description={description}
-              creationDate={creationDate}
-              status={status}
-              handleToggleTodo={handleToggleTodo}
-              handleRemoveTodo={handleRemoveTodo}
-            />
-          );
-        })}
+        return (
+          <TodoItem
+            key={id}
+            id={id}
+            title={title}
+            description={description}
+            creationDate={creationDate}
+            status={status}
+            handleToggleTodo={handleToggleTodo}
+            handleRemoveTodo={handleRemoveTodo}
+          />
+        );
+      })}
+      {currentTodos.length === 0 && <p>No {currentView} todos</p>}
     </StyledTodoManagerContainer>
   );
 }

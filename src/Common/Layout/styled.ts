@@ -133,3 +133,38 @@ export const StyledFlexContainer = styled.div<TFlexContainer>`
     flex-direction: ${props.flexDirection};
   `}
 `;
+
+export const StyledLoadingContainer = styled.div`
+  display: flex;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  z-index: 101;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.theme.background};
+  filter: opacity(0.5);
+`;
+
+export const StyledLoader = styled.div`
+  border: 4px solid ${(props) => props.theme.main};
+  border-top: 4px solid ${(props) => props.theme.buttons.primary};
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;

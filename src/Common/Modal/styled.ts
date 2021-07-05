@@ -34,6 +34,10 @@ export const StyledModalContainer = styled.div`
 
   @media (min-width: 600px) {
     padding: 60px 48px;
+
+    h1 {
+      margin-bottom: 44px;
+    }
   }
 `;
 
@@ -49,6 +53,7 @@ export const StyledInputField = styled.input`
   @media (min-width: 600px) {
     width: 480px;
     padding: 20px 24px;
+    margin-bottom: 20px;
   }
 `;
 
@@ -65,5 +70,13 @@ export const StyledTextArea = styled.textarea`
   @media (min-width: 600px) {
     width: 480px;
     padding: 20px 24px;
+    margin-bottom: 20px;
   }
+`;
+
+export const StyledCloseButton = styled.img`
+  position: absolute;
+  top: 21px;
+  right: 21px;
+  cursor: pointer;
 `;

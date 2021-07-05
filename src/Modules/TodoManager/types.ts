@@ -18,4 +18,5 @@ export interface ITodoStore {
   toggleTodo: (id: string) => void;
   changeView: (newView: keyof typeof EViews) => void;
   currentView: keyof typeof EViews;
+  isLoading: boolean;
 }
