@@ -1,4 +1,4 @@
-import { MouseEvent, useCallback } from "react";
+import { MouseEvent, useCallback, useEffect } from "react";
 import shallow from "zustand/shallow";
 import { TodoItem } from "../../Common/TodoItem";
 import { StyledTodoManagerContainer } from "./styled";
@@ -6,22 +6,28 @@ import { StyledTodoManagerContainer } from "./styled";
 import { useTodoStore } from "./useTodoStore";
 
 export function TodoManager(): JSX.Element {
-  const { todos, currentView, toggleTodo, removeTodo } = useTodoStore(
-    (state) => ({
-      todos: state.todos,
-      addTodo: state.addTodo,
-      removeTodo: state.removeTodo,
-      currentView: state.currentView,
-      toggleTodo: state.toggleTodo,
-    }),
-    shallow
-  );
+  const { todos, currentView, toggleTodo, removeTodo, fetchTodos } =
+    useTodoStore(
+      (state) => ({
+        todos: state.todos,
+        addTodo: state.addTodo,
+        removeTodo: state.removeTodo,
+        currentView: state.currentView,
+        toggleTodo: state.toggleTodo,
+        fetchTodos: state.fetchTodos,
+      }),
+      shallow
+    );
+
+  useEffect(() => {
+    fetchTodos();
+  }, [fetchTodos]);
 
   const handleToggleTodo = useCallback(
     (e: MouseEvent<HTMLInputElement>) => {
-      const { id } = e.currentTarget;
+      const { id, checked } = e.currentTarget;
 
-      return toggleTodo(id);
+      return toggleTodo(id, checked);
     },
     [toggleTodo]
   );
@@ -33,13 +39,13 @@ export function TodoManager(): JSX.Element {
     [removeTodo]
   );
 
-  const currentTodos = todos.filter(
+  const currentTodos = todos?.filter(
     (rawTodo) => rawTodo.status === currentView
   );
 
   return (
     <StyledTodoManagerContainer>
-      {currentTodos.map((currentTodo) => {
+      {currentTodos?.map((currentTodo) => {
         const { id, title, description, creationDate, status } = currentTodo;
 
         return (
@@ -55,7 +61,7 @@ export function TodoManager(): JSX.Element {
           />
         );
       })}
-      {currentTodos.length === 0 && <p>No {currentView} todos</p>}
+      {currentTodos?.length === 0 && <p>No {currentView} todos</p>}
     </StyledTodoManagerContainer>
   );
 }

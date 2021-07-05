@@ -1,71 +1,67 @@
 import create from "zustand";
-import { mockTodos } from "./mock";
-import { ITodo, ITodoStore, EViews } from "./types";
-
-const fakeSleep = (timeToWait = 200) =>
-  new Promise((resolve) =>
-    setTimeout(() => {
-      resolve(true);
-    }, timeToWait)
-  );
+import { deleteTodo, getTodos, patchTodo, postTodo } from "./services";
+import { ITodoStore, EViews } from "./types";
 
 export const useTodoStore = create<ITodoStore>((set) => ({
-  todos: mockTodos,
+  todos: [],
+  isLoading: false,
   currentView: EViews.OPEN,
-  changeView: async (newView: keyof typeof EViews) => {
-    set({ isLoading: true });
-
-    await fakeSleep(300);
-
+  changeView: (newView) => {
     return set({
       currentView: newView,
+    });
+  },
+  fetchTodos: async () => {
+    set({ isLoading: true });
+
+    const result = await getTodos();
+
+    return set({
+      todos: result,
       isLoading: false,
     });
   },
-  addTodo: async (todoItem: ITodo) => {
+  addTodo: async (todoItem) => {
     set({ isLoading: true });
 
-    await fakeSleep(1000);
+    const result = await postTodo(todoItem);
 
     return set((state) => {
       return {
-        todos: [...state.todos, todoItem],
+        todos: [...state.todos, result],
         isLoading: false,
       };
     });
   },
-  removeTodo: async (id: string) => {
+  removeTodo: async (id) => {
     set({ isLoading: true });
 
-    await fakeSleep(700);
+    await deleteTodo(id);
 
-    return set((state) => {
-      return {
-        todos: [...state.todos.filter((currentTodo) => currentTodo.id !== id)],
-        isLoading: false,
-      };
+    const result = await getTodos();
+
+    return set({
+      todos: result,
+      isLoading: false,
     });
   },
-  toggleTodo: async (id: string) => {
+  toggleTodo: async (id, checked) => {
     set({ isLoading: true });
 
-    await fakeSleep(250);
+    const newStatus = checked ? "CLOSED" : "OPEN";
 
-    return set((state) => {
-      return {
-        todos: state.todos.map((currentTodo) => {
-          if (currentTodo.id === id) {
-            return {
-              ...currentTodo,
-              status: currentTodo.status === "OPEN" ? "CLOSED" : "OPEN",
-            };
-          }
+    await patchTodo(
+      id,
+      JSON.stringify({
+        status: newStatus,
+      })
+    );
 
-          return currentTodo;
-        }),
-        isLoading: false,
-      };
+    const result = await getTodos();
+
+    return set({
+      todos: result,
+      isLoading: false,
     });
   },
-  isLoading: false,
 }));
