@@ -1,12 +1,15 @@
 import { MutableRefObject, useRef } from "react";
 import { formatDate } from "../Helpers";
 import { Radio } from "../Radio";
-import { StyledDotMenu, StyledTodoContainer } from "./styled";
+import {
+  StyledDotMenu,
+  StyledDotMenuItem,
+  StyledTodoContainer,
+} from "./styled";
 import { TTodoItemProps } from "./types";
 import DotMenu from "../../Assets/dots-icon.svg";
 import { StyledFlexContainer } from "../Layout/styled";
 import { useModal } from "../Hooks/useModal";
-import { Button } from "../Button";
 
 export function TodoItem({
   id,
@@ -34,12 +37,11 @@ export function TodoItem({
       {isOpen && (
         <ModalWrapper backdrop fade={false} controlId={`dot-menu-${id}`}>
           <StyledDotMenu>
-            <Button
-              color="secondary"
+            <StyledDotMenuItem
               onClick={() => handleRemoveTodo(id).then(() => closeModal())}
             >
               Remove TODO
-            </Button>
+            </StyledDotMenuItem>
           </StyledDotMenu>
         </ModalWrapper>
       )}

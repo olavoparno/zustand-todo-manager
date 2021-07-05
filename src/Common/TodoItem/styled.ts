@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { StyledFlexContainer } from "../Layout/styled";
 
 export const StyledTodoContainer = styled.div`
   background: ${(props) => props.theme.background};
@@ -28,7 +29,7 @@ export const StyledTodoContainer = styled.div`
     border-top-left-radius: 20px;
     padding: 13px 16px;
 
-    svg {
+    img {
       cursor: pointer;
     }
 
@@ -75,15 +76,28 @@ export const StyledDotMenu = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${(props) => props.theme.todo.light};
+  flex-direction: column;
+  background-color: ${(props) => props.theme.todo.dark};
   border: 1px solid ${(props) => props.theme.background};
-  width: 178px;
-  height: 68px;
+  width: 196px;
+  height: auto;
   right: 30px;
-  border-radius: 20px;
+  padding: 8px 0 0;
 
   @media (min-width: 600px) {
     right: 182px;
-    width: 216px;
+    width: 200px;
   }
+`;
+
+export const StyledDotMenuItem = styled(StyledFlexContainer)`
+  background-color: ${(props) => props.theme.todo.light};
+  padding: 8px;
+  margin-bottom: 8px;
+  width: 180px;
+  height: 52px;
+  font-size: 14px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 `;
