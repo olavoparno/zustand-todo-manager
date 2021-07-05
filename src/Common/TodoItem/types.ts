@@ -8,4 +8,5 @@ export type TTodoItemProps = {
   creationDate: string;
   status: keyof typeof EViews;
   handleToggleTodo: (e: MouseEvent<HTMLInputElement>) => void;
+  handleRemoveTodo: (id: string) => Promise<void>;
 };
