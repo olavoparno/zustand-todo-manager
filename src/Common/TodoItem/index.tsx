@@ -32,7 +32,7 @@ export function TodoItem({
   return (
     <StyledTodoContainer>
       {isOpen && (
-        <ModalWrapper backdrop fade={false} controlId="dot-menu">
+        <ModalWrapper backdrop fade={false} controlId={`dot-menu-${id}`}>
           <StyledDotMenu>
             <Button
               color="secondary"
@@ -59,7 +59,7 @@ export function TodoItem({
           onKeyPress={handleDotMenuClick}
           ref={dotMenuRef as MutableRefObject<HTMLDivElement>}
         >
-          <img id="dot-menu" src={DotMenu} alt="" />
+          <img id={`dot-menu-${id}`} src={DotMenu} alt="" />
         </div>
       </div>
       <div className="container-body">

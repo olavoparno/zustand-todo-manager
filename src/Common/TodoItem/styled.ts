@@ -77,8 +77,13 @@ export const StyledDotMenu = styled.div`
   justify-content: center;
   background-color: ${(props) => props.theme.todo.light};
   border: 1px solid ${(props) => props.theme.background};
-  width: 216px;
+  width: 178px;
   height: 68px;
-  right: 182px;
+  right: 30px;
   border-radius: 20px;
+
+  @media (min-width: 600px) {
+    right: 182px;
+    width: 216px;
+  }
 `;
