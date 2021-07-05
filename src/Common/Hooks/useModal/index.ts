@@ -89,6 +89,8 @@ function WithClickOutside(
 
 export function useModal({
   bindToElement = global.document.body,
+}: {
+  bindToElement?: HTMLElement | SVGSVGElement;
 } = {}): TUseModalReturn {
   const [isOpen, setModalOpen] = useState(false);
 

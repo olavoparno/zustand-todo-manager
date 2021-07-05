@@ -3,6 +3,7 @@ import { useTodoStore } from "../../Modules/TodoManager/useTodoStore";
 import { Button } from "../Button";
 import { generateUuid } from "../Helpers";
 import { useInput } from "../Hooks/useInput";
+import { StyledFlexContainer } from "../Layout/styled";
 import {
   StyledInputField,
   StyledModalContainer,
@@ -35,18 +36,22 @@ export function TodoModal({
 
   return (
     <StyledModalContainer>
-      Add new TODO
-      <StyledInputField
-        name="titleInput"
-        value={values.titleInput}
-        onChange={handleChange}
-      />
-      <StyledTextArea
-        name="descriptionInput"
-        value={values.descriptionInput}
-        onChange={handleChange}
-      />
-      <Button onClick={handleAddTodo}>New Task</Button>
+      <StyledFlexContainer justifyContent="center" flexDirection="column">
+        <h1>New Task</h1>
+        <StyledInputField
+          name="titleInput"
+          value={values.titleInput}
+          onChange={handleChange}
+          placeholder="Title"
+        />
+        <StyledTextArea
+          name="descriptionInput"
+          value={values.descriptionInput}
+          onChange={handleChange}
+          placeholder="Description"
+        />
+        <Button onClick={handleAddTodo}>Save</Button>
+      </StyledFlexContainer>
     </StyledModalContainer>
   );
 }
