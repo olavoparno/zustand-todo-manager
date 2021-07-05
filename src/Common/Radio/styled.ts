@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledCheckmark = styled.span`
-  position: block;
+  display: block;
   top: 0;
   left: 0;
   height: 20px;
@@ -56,7 +56,7 @@ export const StyledLabel = styled.label`
 
   ${StyledCheckmark}:after {
     left: 6px;
-    top: 7px;
+    top: 2px;
     width: 5px;
     height: 10px;
     border: solid white;

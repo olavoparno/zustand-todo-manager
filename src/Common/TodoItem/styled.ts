@@ -4,20 +4,33 @@ export const StyledTodoContainer = styled.div`
   background: ${(props) => props.theme.background};
   margin-bottom: 37px;
 
-  @media (min-width: 600px) {
-    margin-bottom: 61px;
-  }
-
   h2 {
     margin-left: 9px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+  }
+
+  @media (min-width: 600px) {
+    margin-bottom: 61px;
+
+    h2 {
+      margin-left: 20px;
+    }
   }
 
   .container-head {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: ${(props) => props.theme.todo.light};
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
     padding: 13px 16px;
+
+    svg {
+      cursor: pointer;
+    }
 
     @media (min-width: 600px) {
       padding: 20px;
@@ -55,4 +68,17 @@ export const StyledTodoContainer = styled.div`
       padding: 20px;
     }
   }
+`;
+
+export const StyledDotMenu = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => props.theme.todo.light};
+  border: 1px solid ${(props) => props.theme.background};
+  width: 216px;
+  height: 68px;
+  right: 182px;
+  border-radius: 20px;
 `;

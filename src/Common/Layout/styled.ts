@@ -87,6 +87,7 @@ type TFlexContainer = {
   justifyContent?: string;
   fullWidth?: boolean;
   spacing?: number;
+  flexDirection?: string;
 };
 
 export const StyledFlexContainer = styled.div<TFlexContainer>`
@@ -124,5 +125,11 @@ export const StyledFlexContainer = styled.div<TFlexContainer>`
     *:not(:last-child) {
       margin-right: ${props.spacing}px;
     }
+  `}
+
+  ${(props) =>
+    props.flexDirection &&
+    `
+    flex-direction: ${props.flexDirection};
   `}
 `;

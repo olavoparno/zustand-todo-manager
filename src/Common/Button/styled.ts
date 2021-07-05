@@ -9,7 +9,7 @@ export const StyledButton = styled.button`
   border-radius: 20px;
   width: 163px;
   height: 48px;
-  border: 1px solid ${(props) => props.theme.main};
+  border: 1px solid ${(props) => props.theme.buttons.active};
 
   background-color: ${(props) =>
     props.theme.buttons[props.color as keyof typeof props.theme.buttons] ||
