@@ -1,7 +1,6 @@
 import { ITodo } from "../../Modules/TodoManager/types";
 import { useTodoStore } from "../../Modules/TodoManager/useTodoStore";
 import { Button } from "../Button";
-import { generateUuid } from "../Helpers";
 import { useInput } from "../Hooks/useInput";
 import { StyledFlexContainer } from "../Layout/styled";
 import {
@@ -25,12 +24,10 @@ export function TodoModal({
 
   const handleAddTodo = () => {
     const { titleInput, descriptionInput } = values;
-    const newTodo: ITodo = {
-      id: generateUuid(),
+    const newTodo: Omit<ITodo, "id" | "creationDate"> = {
       title: titleInput,
       description: descriptionInput,
       status: "OPEN",
-      creationDate: new Date().toString(),
     };
 
     addTodo(newTodo).then(closeModal);

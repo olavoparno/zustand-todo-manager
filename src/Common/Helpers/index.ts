@@ -8,10 +8,3 @@ export function formatDate(date: string): string {
 
   return `${longMonth} ${day}, ${year} ${time}`;
 }
-
-export function generateUuid(): string {
-  return "00-0-4-1-000".replace(/[^-]/g, (s) =>
-    // eslint-disable-next-line no-bitwise
-    (((Math.random() + ~~s) * 0x10000) >> +s).toString(16).padStart(4, "0")
-  );
-}

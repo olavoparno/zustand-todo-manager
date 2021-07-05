@@ -16,7 +16,9 @@ export async function getTodos(): Promise<ITodo[]> {
   return response.json();
 }
 
-export async function postTodo(data: ITodo): Promise<ITodo> {
+export async function postTodo(
+  data: Omit<ITodo, "id" | "creationDate">
+): Promise<ITodo> {
   const response = await fetch(url, {
     method: "POST",
     headers: {
