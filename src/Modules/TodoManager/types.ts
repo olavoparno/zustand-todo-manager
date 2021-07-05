@@ -14,7 +14,7 @@ export interface ITodo {
 export interface ITodoStore {
   todos: ITodo[];
   addTodo: (todoItem: ITodo) => Promise<void>;
-  removeTodo: (todoItem: ITodo) => void;
+  removeTodo: (id: string) => Promise<void>;
   toggleTodo: (id: string) => void;
   changeView: (newView: keyof typeof EViews) => void;
   currentView: keyof typeof EViews;

@@ -6,7 +6,7 @@ import { StyledTodoManagerContainer } from "./styled";
 import { useTodoStore } from "./useTodoStore";
 
 export function TodoManager(): JSX.Element {
-  const { todos, removeTodo, currentView, toggleTodo } = useTodoStore(
+  const { todos, currentView, toggleTodo, removeTodo } = useTodoStore(
     (state) => ({
       todos: state.todos,
       addTodo: state.addTodo,
@@ -21,9 +21,16 @@ export function TodoManager(): JSX.Element {
     (e: MouseEvent<HTMLInputElement>) => {
       const { id } = e.currentTarget;
 
-      toggleTodo(id);
+      return toggleTodo(id);
     },
     [toggleTodo]
+  );
+
+  const handleRemoveTodo = useCallback(
+    (id: string) => {
+      return removeTodo(id);
+    },
+    [removeTodo]
   );
 
   return (
@@ -42,6 +49,7 @@ export function TodoManager(): JSX.Element {
               creationDate={creationDate}
               status={status}
               handleToggleTodo={handleToggleTodo}
+              handleRemoveTodo={handleRemoveTodo}
             />
           );
         })}

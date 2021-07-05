@@ -56,14 +56,10 @@ export const useTodoStore = create<ITodoStore>((set) => ({
         todos: [...state.todos, todoItem],
       };
     }),
-  removeTodo: (todoItem: ITodo) =>
+  removeTodo: async (id: string) =>
     set((state) => {
       return {
-        todos: [
-          ...state.todos.filter(
-            (currentTodo) => currentTodo.id !== todoItem.id
-          ),
-        ],
+        todos: [...state.todos.filter((currentTodo) => currentTodo.id !== id)],
       };
     }),
   toggleTodo: (id: string) =>
