@@ -61,7 +61,7 @@ export function TodoManager(): JSX.Element {
           />
         );
       })}
-      {currentTodos?.length === 0 && <p>No {currentView} todos</p>}
+      {currentTodos?.length === 0 && <p>No {currentView} tasks</p>}
     </StyledTodoManagerContainer>
   );
 }

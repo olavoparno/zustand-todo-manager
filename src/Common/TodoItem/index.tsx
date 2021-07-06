@@ -65,7 +65,7 @@ export function TodoItem({
         </div>
       </div>
       <div className="container-body">
-        <p>{description}</p>
+        <span>{description}</span>
       </div>
       <div className="container-foot">Created {formatDate(creationDate)}</div>
     </StyledTodoContainer>
